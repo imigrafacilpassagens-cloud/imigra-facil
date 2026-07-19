@@ -1,5 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ============ DARK MODE: botão no hero ============ */
+  const themeToggle = document.getElementById('themeToggle');
+  const themeToggleIcon = document.getElementById('themeToggleIcon');
+  const root = document.documentElement;
+
+  const applyIcon = (isDark) => {
+    if (!themeToggleIcon) return;
+    themeToggleIcon.classList.toggle('fa-moon', !isDark);
+    themeToggleIcon.classList.toggle('fa-sun', isDark);
+  };
+
+  applyIcon(root.getAttribute('data-theme') === 'dark');
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      const next = isDark ? 'light' : 'dark';
+
+      if (next === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+      } else {
+        root.removeAttribute('data-theme');
+      }
+
+      themeToggle.setAttribute('aria-pressed', String(next === 'dark'));
+      applyIcon(next === 'dark');
+
+      try {
+        localStorage.setItem('theme', next);
+      } catch (e) {
+        /* segue sem salvar a preferência */
+      }
+    });
+  }
+
   /* ============ HEADER: sombra ao rolar ============ */
   const header = document.getElementById('header');
   const onScroll = () => {

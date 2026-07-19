@@ -30,16 +30,34 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <link rel="stylesheet" href="style.css">
+<script>
+  /* Aplica o tema salvo (ou preferência do sistema) antes da primeira pintura, evitando flash */
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 
 <!-- ===== HEADER ===== -->
 <header class="header" id="header">
   <div class="container header__inner">
-    <a href="#top" class="logo">
-      <span class="logo__icon"><i class="fa-solid fa-ticket"></i></span>
-      IMIGRA FACIL
-    </a>
+    <div class="header__brand">
+      <a href="#top" class="logo">
+        <span class="logo__icon"><i class="fa-solid fa-ticket"></i></span>
+        IMIGRA FACIL
+      </a>
+
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar modo escuro" aria-pressed="false">
+        <i class="fa-solid fa-moon" id="themeToggleIcon"></i>
+      </button>
+    </div>
 
     <nav class="nav" id="nav">
       <a href="#beneficios" class="nav__link">Benefícios</a>
