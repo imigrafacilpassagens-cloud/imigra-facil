@@ -419,9 +419,34 @@ html[data-theme="dark"] .theme-toggle i { transform: rotate(40deg); }
 .section__title {
   font-size: clamp(28px, 4vw, 40px);
   font-weight: 800;
-  margin-bottom: 56px;
+  margin-bottom: 0;
   max-width: 640px;
   letter-spacing: -0.01em;
+}
+
+.section__header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.section__logo {
+  display: block;
+  flex-shrink: 0;
+  height: 120px;
+  width: auto;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 860px) {
+  .section__header-row { flex-direction: column; }
+  .section__logo { height: 96px; }
 }
 
 .section__title--light { color: var(--white); }
